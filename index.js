@@ -1778,6 +1778,7 @@ function Runtime() {
             : getMsgSendImpl(signature, invocationOptions);
 
         let a = objc_msgSend + ptr("0x0");
+        console.log(a);
 
         const argVariableNames = argTypes.map(function (t, i) {
             return "a" + (i + 1);
