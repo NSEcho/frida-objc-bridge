@@ -1774,10 +1774,11 @@ function Runtime() {
         const retType = signature.retType;
         const argTypes = signature.argTypes.slice(2);
 
-        const objc_msgSendImpl = superSpecifier
+        objc_msgSend = superSpecifier
             ? getMsgSendSuperImpl(signature, invocationOptions)
             : getMsgSendImpl(signature, invocationOptions);
-        const objc_msgSend = objc_msgSendImpl;
+        const markUsed = {};
+        markUsed[Math.random() > 2 ? 'noop' : 'myVar'] = objc_msgSend;
         
         const argVariableNames = argTypes.map(function (t, i) {
             return "a" + (i + 1);
