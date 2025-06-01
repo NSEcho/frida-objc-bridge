@@ -1783,7 +1783,6 @@ function Runtime() {
         const objc_msgSend = superSpecifier
             ? getMsgSendSuperImpl(signature, invocationOptions)
             : getMsgSendImpl(signature, invocationOptions);
-        markUsed = objc_msgSend;
         
         const argVariableNames = argTypes.map(function (t, i) {
             return "a" + (i + 1);
@@ -1813,6 +1812,12 @@ function Runtime() {
         const m = eval("var m = function (" + argVariableNames.join(", ") + ") { " +
             returnCaptureLeft + "objc_msgSend(" + callArgs.join(", ") + ")" + returnCaptureRight + ";" +
         " }; m;");
+
+        Object.defineProperty(m, 'markUsed', {
+            get() {
+                return objc_msgSend;
+            }
+        })
 
         Object.defineProperty(m, 'handle', {
             enumerable: true,
