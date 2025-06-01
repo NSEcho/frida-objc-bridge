@@ -21,5 +21,7 @@
   "devDependencies": {
     "@types/frida-gum": "^18.8.2"
   },
-  "sideEffects": true
+  "sideEffects": [
+    "/index.js"
+  ]
 }
