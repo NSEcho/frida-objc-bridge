@@ -19,6 +19,7 @@ function Runtime() {
     let readObjectIsa = null;
     const msgSendBySignatureId = new Map();
     const msgSendSuperBySignatureId = new Map();
+    let objc_msgSend;
     let cachedNSString = null;
     let cachedNSStringCtor = null;
     let cachedNSNumber = null;
@@ -1773,15 +1774,9 @@ function Runtime() {
         const retType = signature.retType;
         const argTypes = signature.argTypes.slice(2);
 
-        const objc_msgSend = superSpecifier
+        objc_msgSend = superSpecifier
             ? getMsgSendSuperImpl(signature, invocationOptions)
             : getMsgSendImpl(signature, invocationOptions);
-
-        // This tricks Rollup into keeping myVar
-        (function(x) {
-            // Eval string will reference x
-            eval("console.log(x)");
-        })(objc_msgSend);
         
         const argVariableNames = argTypes.map(function (t, i) {
             return "a" + (i + 1);
