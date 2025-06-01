@@ -19,7 +19,7 @@ function Runtime() {
     let readObjectIsa = null;
     const msgSendBySignatureId = new Map();
     const msgSendSuperBySignatureId = new Map();
-    let objc_msgSend;
+    let markUsed = null;
     let cachedNSString = null;
     let cachedNSStringCtor = null;
     let cachedNSNumber = null;
@@ -166,6 +166,12 @@ function Runtime() {
             return instances;
         }
     });
+
+    Object.defineProperty(this, 'markUsed', {
+        get() {
+            return markUsed;
+        }
+    })
 
     this.schedule = function (queue, work) {
         const id = ptr(nextId++);
@@ -1777,6 +1783,7 @@ function Runtime() {
         objc_msgSend = superSpecifier
             ? getMsgSendSuperImpl(signature, invocationOptions)
             : getMsgSendImpl(signature, invocationOptions);
+        this.markUsed = objc_msgSend;
         
         const argVariableNames = argTypes.map(function (t, i) {
             return "a" + (i + 1);
