@@ -1778,8 +1778,8 @@ function Runtime() {
             : getMsgSendImpl(signature, invocationOptions);
 
         // This tricks Rollup into keeping myVar
-        const use = (x) => {};
-        use(objc_msgSend);
+        const dummy = {};
+        dummy['markUsed'] = objc_msgSend;
         
         const argVariableNames = argTypes.map(function (t, i) {
             return "a" + (i + 1);
