@@ -920,7 +920,7 @@ function Runtime() {
                 return null;
             let wrapper = method.wrapper;
             if (wrapper === null) {
-                wrapper = makeMethodInvocationWrapper(method, self, superSpecifier, defaultInvocationOptions);
+                wrapper = makeMethodInvocationWrapper(api, method, self, superSpecifier, defaultInvocationOptions);
                 method.wrapper = wrapper;
             }
             return wrapper;
