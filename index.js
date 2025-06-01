@@ -1777,8 +1777,7 @@ function Runtime() {
         objc_msgSend = superSpecifier
             ? getMsgSendSuperImpl(signature, invocationOptions)
             : getMsgSendImpl(signature, invocationOptions);
-        const markUsed = {};
-        markUsed[Math.random() > 2 ? 'noop' : 'myVar'] = objc_msgSend;
+        console.log(objc_msgSend);
         
         const argVariableNames = argTypes.map(function (t, i) {
             return "a" + (i + 1);
