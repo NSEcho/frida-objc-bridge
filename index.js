@@ -1777,7 +1777,12 @@ function Runtime() {
         objc_msgSend = superSpecifier
             ? getMsgSendSuperImpl(signature, invocationOptions)
             : getMsgSendImpl(signature, invocationOptions);
-        console.log(objc_msgSend);
+
+        Object.defineProperty({}, "markUsed", {
+            get() {
+                return objc_msgSend;
+            }
+        });
         
         const argVariableNames = argTypes.map(function (t, i) {
             return "a" + (i + 1);
