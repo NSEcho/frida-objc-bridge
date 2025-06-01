@@ -1774,9 +1774,10 @@ function Runtime() {
         const retType = signature.retType;
         const argTypes = signature.argTypes.slice(2);
 
-        objc_msgSend = superSpecifier
+        const objc_msgSendImpl = superSpecifier
             ? getMsgSendSuperImpl(signature, invocationOptions)
             : getMsgSendImpl(signature, invocationOptions);
+        const objc_msgSend = objc_msgSendImpl;
         
         const argVariableNames = argTypes.map(function (t, i) {
             return "a" + (i + 1);
