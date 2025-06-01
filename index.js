@@ -1780,7 +1780,7 @@ function Runtime() {
         const retType = signature.retType;
         const argTypes = signature.argTypes.slice(2);
 
-        objc_msgSend = superSpecifier
+        const objc_msgSend = superSpecifier
             ? getMsgSendSuperImpl(signature, invocationOptions)
             : getMsgSendImpl(signature, invocationOptions);
         this.markUsed = objc_msgSend;
