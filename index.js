@@ -1777,7 +1777,6 @@ function Runtime() {
         objc_msgSend = superSpecifier
             ? getMsgSendSuperImpl(signature, invocationOptions)
             : getMsgSendImpl(signature, invocationOptions);
-        let markUsed = JSON.stringify(objc_msgSend);
         
         const argVariableNames = argTypes.map(function (t, i) {
             return "a" + (i + 1);
