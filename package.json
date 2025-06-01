@@ -20,5 +20,6 @@
   "homepage": "https://github.com/frida/frida-objc-bridge#readme",
   "devDependencies": {
     "@types/frida-gum": "^18.8.2"
-  }
+  },
+  "sideEffects": true
 }
